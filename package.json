@@ -1,0 +1,19 @@
+{
+  "name": "croptalk-garden",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5555 --strictPort",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "start": "node server.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.3",
+    "vite": "^6.2.0"
+  },
+  "dependencies": {
+    "firebase": "11.10.0"
+  }
+}
