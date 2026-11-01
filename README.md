@@ -27,8 +27,6 @@
 </p>
 <p align="center"><em>Giao diện mobile — vườn của tôi</em></p>
 
-Screenshots chụp từ bản dev (`pnpm dev`) với tài khoản demo trải nghiệm.
-
 ## Phạm vi hiện tại
 
 Lát cắt đầu tiên chỉ gồm Khu vườn và theo dõi sản xuất. Khách hàng có thể theo dõi khu vườn ảo gắn với sản xuất thực, nhưng bản pilot ban đầu không bán dịch vụ, không cam kết thu hoạch, giao hàng hay tồn kho có thể giao dịch.
@@ -40,21 +38,9 @@ Game là một lớp tương tác. Mọi trạng thái sản xuất hiển thị
 - [Tầm nhìn sản phẩm](docs/croptalk-garden-product-vision.md)
 - [Kế hoạch triển khai nền tảng](docs/plans/croptalk-garden-foundation-plan.md)
 
-## Trạng thái dự án
-
-Giao diện Garden và luồng session khách hàng Firebase-to-CRM đã được triển khai. Đăng nhập thật và dữ liệu sản xuất vẫn cần cấu hình môi trường Firebase, CRM và Cultivation.
-
-Ở chế độ Vite development, trang đăng nhập có thêm nút **Đăng nhập trải nghiệm**. Session test chỉ chạy local này tải một lô đất mẫu được đánh dấu rõ ràng để test giao diện. Nó không tạo session Firebase hay CRM, không kết nối dịch vụ nông trại, và không xuất hiện ở bản production.
-
 ## Phát triển local
 
 ```bash
 pnpm install
 pnpm dev
 ```
-
-## Session khách hàng và server API
-
-Garden dùng chung định danh khách hàng Firebase và session CRM riêng theo origin của Garden (HTTP-only). Cấu hình các giá trị `VITE_FIREBASE_*` từ web app Firebase Croptalk hiện có. Garden là tài sản chỉ thuộc HydroWorks và dùng tenant Hydroworks được cấu hình trong BFF phía server. CRM xác thực Firebase ID token và vai trò khách hàng, còn Cultivation thực thi quyền gắn khách hàng với lô đất.
-
-Server dev và preview của Vite đều expose middleware BFF `/api` cùng origin. Deploy Node production phục vụ `dist/` và BFF bằng `node server.mjs` sau `pnpm build`. Không để lộ CRM access token, credential dịch vụ nội bộ hay lựa chọn tenant ra browser.
