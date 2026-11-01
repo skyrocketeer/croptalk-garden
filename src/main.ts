@@ -789,16 +789,77 @@ const communityContent = () => {
   `;
 };
 
+type ShopProduct = {
+  name: string;
+  desc: string;
+  price: string;
+  unit: string;
+  icon: keyof typeof icons;
+  tag?: string;
+};
+
+// Dữ liệu mẫu phục vụ demo giao diện — cửa hàng thật sẽ dùng dữ liệu khi được kết nối.
+const shopCatalog: { category: string; icon: keyof typeof icons; products: ShopProduct[] }[] = [
+  {
+    category: "Hạt giống",
+    icon: "seedling",
+    products: [
+      { name: "Hạt giống Xà lách Romaine", desc: "Gói 50 hạt · nảy mầm 95%", price: "25", unit: "HWK", icon: "seedling", tag: "Bán chạy" },
+      { name: "Hạt giống Cà chua bi", desc: "Gói 30 hạt · chịu nhiệt tốt", price: "30", unit: "HWK", icon: "seedling" },
+      { name: "Hạt giống Rau muống", desc: "Gói 100 hạt · thu hoạch sau 25 ngày", price: "20", unit: "HWK", icon: "seedling" },
+    ],
+  },
+  {
+    category: "Vật phẩm trang trí",
+    icon: "leaf",
+    products: [
+      { name: "Chậu gốm Bát Tràng", desc: "Thủ công · men xanh lam", price: "120", unit: "HWK", icon: "leaf" },
+      { name: "Đèn lồng vườn năng lượng mặt trời", desc: "Sáng 8 tiếng mỗi đêm", price: "90", unit: "HWK", icon: "sun" },
+      { name: "Tượng gà gốm mini", desc: "Trang trí luống rau thêm vui", price: "45", unit: "HWK", icon: "livestock" },
+    ],
+  },
+  {
+    category: "Nâng cấp",
+    icon: "trophy",
+    products: [
+      { name: "Hệ thống tưới nhỏ giọt", desc: "Tiết kiệm 60% lượng nước", price: "350", unit: "HWK", icon: "water", tag: "Mới" },
+      { name: "Nhà kính mini 2m²", desc: "Che mưa nắng quanh năm", price: "500", unit: "HWK", icon: "trophy" },
+    ],
+  },
+  {
+    category: "Vật phẩm khác",
+    icon: "basket",
+    products: [
+      { name: "Phân hữu cơ vi sinh", desc: "Túi 5kg · ủ hoai 100%", price: "60", unit: "HWK", icon: "basket" },
+      { name: "Bộ dụng cụ làm vườn 5 món", desc: "Xẻng, cào, kéo, găng tay", price: "150", unit: "HWK", icon: "harvest" },
+    ],
+  },
+];
+
 const shopContent = () => `
   <section class="shop-view" aria-labelledby="shop-title">
-    <header class="shop-page-heading"><div><p class="card-kicker">CỬA HÀNG CROPTALK</p><h1 id="shop-title">Cửa hàng</h1><p>Hạt giống, vật phẩm trang trí, nâng cấp và vật phẩm khác.</p></div></header>
-    <section class="shop-category-grid" aria-label="Danh mục cửa hàng">
-      <article class="shop-category-card">${icons.seedling}<h2>Hạt giống</h2><span>Sắp ra mắt</span></article>
-      <article class="shop-category-card">${icons.leaf}<h2>Vật phẩm trang trí</h2><span>Sắp ra mắt</span></article>
-      <article class="shop-category-card">${icons.trophy}<h2>Nâng cấp</h2><span>Sắp ra mắt</span></article>
-      <article class="shop-category-card">${icons.basket}<h2>Vật phẩm khác</h2><span>Sắp ra mắt</span></article>
-    </section>
-    <p class="shop-coming-note">Danh mục sẽ mở bán khi cửa hàng được kết nối.</p>
+    <header class="shop-page-heading"><div><p class="card-kicker">CỬA HÀNG CROPTALK</p><h1 id="shop-title">Cửa hàng</h1><p>Hạt giống, vật phẩm trang trí, nâng cấp và vật phẩm khác.</p></div><span class="demo-badge">Dữ liệu mẫu</span></header>
+    ${shopCatalog
+      .map(
+        (group) => `
+      <section class="shop-group" aria-label="${group.category}">
+        <h2 class="shop-group-title">${icons[group.icon]}<span>${group.category}</span></h2>
+        <div class="shop-product-grid">
+          ${group.products
+            .map(
+              (product) => `
+            <article class="shop-product-card">
+              <div class="shop-product-art">${icons[product.icon]}${product.tag ? `<span class="shop-product-tag">${product.tag}</span>` : ""}</div>
+              <div class="shop-product-info"><h3>${product.name}</h3><p>${product.desc}</p></div>
+              <div class="shop-product-buyrow"><p class="shop-product-price">${product.price} <span>${product.unit}</span></p><button class="game-button primary shop-buy-button" type="button" data-upcoming>Mua</button></div>
+            </article>`,
+            )
+            .join("")}
+        </div>
+      </section>`,
+      )
+      .join("")}
+    <p class="shop-coming-note">Sản phẩm mẫu phục vụ demo giao diện — cửa hàng thật sẽ mở bán khi được kết nối.</p>
   </section>
 `;
 
