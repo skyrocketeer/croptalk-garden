@@ -1,7 +1,5 @@
 # Croptalk Garden — Khu vườn biết nói
 
-Standalone customer-facing web project for the Croptalk Garden experience.
-
 ## Showcase
 
 ![Bảng thiết kế UI Croptalk Garden](docs/showcase/00-design-board.png)
